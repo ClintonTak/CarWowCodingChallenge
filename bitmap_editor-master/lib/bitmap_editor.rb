@@ -1,15 +1,14 @@
 class BitmapEditor
 
 	def run(file)
+		outputString = ""
 		return puts "please provide correct file" if file.nil? || !File.exists?(file)
 
 		File.open(file).each do |line|
 			
 			line = line.downcase #lowercase for better input handling 
 			line = line.gsub(/\s+/, "")#removing whitespace for better parsing 
-			#puts line
-			#puts line[0]
-			outputString = ""
+
 			case line[0]
 			when 'i'
 				width = line[1].to_i
@@ -22,15 +21,18 @@ class BitmapEditor
 					outputString.concat("\n")
 					width -=1
 				end
-=begin
-			when 's'
-				puts "There is no image"
 
+			when 's'
+				outputString.concat("There is no image.\n")
+=begin
 			else
 				puts 'unrecognised command :(' 
 =end
-			print outputString
+			
 			end 
+			
 		end
+		print outputString
 	end
+	
 end
