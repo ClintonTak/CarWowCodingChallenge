@@ -16,21 +16,18 @@ class BitmapEditor
 					length = subline[1].to_i
 					handleI(width, length)
 				##handling "L" case 
-=begin
+
 				when 'l', 'L'
 					if line.include? "-" #possibly move this out to different area 
 						puts "negative number detected"
 						return 0
-					elsif subline[1].to_i < 1 or subline[1].to_i > width 
-						puts "improper x coordinate on 'L' line "
-						return 0
-					elsif subline[2].to_i < 1  or subline[2].to_i > length 
-						puts "improper y coordinate input on 'L' line"
-						return 0
 					else 
-						outputArray[subline[2].to_i-1][subline[1].to_i-1] = subline[3]
+						handleL(subline[1].to_i,subline[2].to_i, subline[3], width, length)
 					end
+
+=begin
 				##handling "C" case 
+
 				when 'c', 'C'
 					outputArray.each_index do |i|
 						outputArray[i].each_index do |j|
@@ -71,22 +68,36 @@ class BitmapEditor
 				
 			end 
 		end 
-		
 	end
+
+
+
 	def handleI(width, length)
 		i = width
-			while i > 0
-				j = length
-				subArray = []
-				while j > 0
-					subArray.push('O')
-					j -= 1
-				end
-				@outputArray.push(subArray)
-				i -=1
+		while i > 0
+			j = length
+			subArray = []
+			while j > 0
+				subArray.push('O')
+				j -= 1
 			end
+			@outputArray.push(subArray)
+			i -=1
 		end
-				
+	end
+
+	def handleL(x, y, color, width, length)
+		if x< 1 or y > width 
+			puts "improper x coordinate on 'L' line "
+			return 0
+		elsif y < 1  or y > length 
+			puts "improper y coordinate input on 'L' line"
+			return 0
+		else 
+			@outputArray[y-1][x-1] = color
+		end
+	end 
+
 
 	def handleS()
 		puts @outputArray.map{|x| x.join('')}		
