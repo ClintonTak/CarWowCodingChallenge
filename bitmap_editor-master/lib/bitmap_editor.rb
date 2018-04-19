@@ -65,12 +65,12 @@ class BitmapEditor
 				##Handling "H" case
 				when 'h'
 					if line[2].to_i<line[3].to_i #normal case that x1 is less than x2
-						for x in line[2].to_i-1..line[3].to_i-1
-							outputArray[line[1].to_i-1][x] = line[4]
+						for x in line[2].to_i..line[3].to_i-1
+							outputArray[line[1].to_i-2][x] = line[4]
 						end 
 					else 
-						for x in line[3].to_i-1..line[2].to_i-1
-							outputArray[line[1].to_i-1][x] = line[4]
+						for x in line[3].to_i..line[2].to_i-1
+							outputArray[line[1].to_i-2][x] = line[4]
 						end
 					end
 				when 's'
