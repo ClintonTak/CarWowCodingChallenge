@@ -42,7 +42,7 @@ class BitmapEditor
 						puts "improper y coordinate input on 'L' line"
 						return 0
 					else 
-						outputArray[line[1].to_i-1][line[2].to_i-1] = line[3]
+						outputArray[line[2].to_i-1][line[1].to_i-1] = line[3]
 					end
 				##handling "C" case 
 				when 'c'
