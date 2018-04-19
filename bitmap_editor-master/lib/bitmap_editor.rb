@@ -1,8 +1,7 @@
 class BitmapEditor
 
 	def run(file)
-		outputString = ""
-		outputArray = [] 
+		@outputArray = [] 
 		width = 0
 		length = 0
 		return puts "please provide correct file" if file.nil? || !File.exists?(file)
@@ -15,20 +14,9 @@ class BitmapEditor
 				when 'i', 'I'
 					width = subline[2].to_i
 					length = subline[1].to_i
-					i = width
-					while i > 0
-						j = length
-						subArray = []
-						while j > 0
-							#outputString.concat('0')
-							subArray.push('O')
-							j -= 1
-						end
-						#outputString.concat("\n")
-						outputArray.push(subArray)
-						i -=1
-					end
+					handleI(width, length)
 				##handling "L" case 
+=begin
 				when 'l', 'L'
 					if line.include? "-" #possibly move this out to different area 
 						puts "negative number detected"
@@ -71,9 +59,10 @@ class BitmapEditor
 							outputArray[subline[1].to_i-2][x] = subline[4]
 						end
 					end
+=end
 				when 's', 'S'
-					#print outputString
-					puts outputArray.map{|x| x.join('')}
+					handleS
+					
 =begin
 
 				else
@@ -84,4 +73,23 @@ class BitmapEditor
 		end 
 		
 	end
+	def handleI(width, length)
+		i = width
+			while i > 0
+				j = length
+				subArray = []
+				while j > 0
+					subArray.push('O')
+					j -= 1
+				end
+				@outputArray.push(subArray)
+				i -=1
+			end
+		end
+				
+
+	def handleS()
+		puts @outputArray.map{|x| x.join('')}		
+	end
+
 end
