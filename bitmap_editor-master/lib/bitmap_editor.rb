@@ -44,8 +44,7 @@ class BitmapEditor
 						puts "improper y coordinate input on 'L' line"
 						return 0
 					else 
-						lineIndex = line[2].to_i*line[1].to_i
-						outputString[lineIndex-1] = line[3]
+						outputArray[line[1].to_i-1][line[2].to_i-1] = line[3]
 					end
 				
 
@@ -54,12 +53,6 @@ class BitmapEditor
 					#print outputString
 					puts outputArray.map{|x| x.join('')}
 =begin
-					outputArray.each do |x|
-						x.each_index do |y|
-							print x[y].gsub(/\s+/, "").gsub("\n", "")
-						print "\n"
-						end
-					end
 
 				else
 					puts 'unrecognised command :(' 
