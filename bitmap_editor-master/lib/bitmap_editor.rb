@@ -15,8 +15,8 @@ class BitmapEditor
 			case line[0]
 				##Handles inital setup for "I" inputs 
 				when 'i'
-					width = line[1].to_i
-					length = line[2].to_i
+					width = line[2].to_i
+					length = line[1].to_i
 					i = width
 					while i > 0
 						j = length
