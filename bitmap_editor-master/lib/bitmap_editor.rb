@@ -25,26 +25,18 @@ class BitmapEditor
 						handleL(subline[1].to_i,subline[2].to_i, subline[3], width, length)
 					end
 
-=begin
+
 				##handling "C" case 
 
 				when 'c', 'C'
-					outputArray.each_index do |i|
-						outputArray[i].each_index do |j|
-							outputArray[i][j] = "O"
-						end
-					end
+					clearArray()
+
 				##Handling "V" case 
-				when 'v', 'V' 
-					if subline[2].to_i<subline[3].to_i #normal case that y1 is less than y2
-						for x in subline[2].to_i-1..subline[3].to_i-1
-							outputArray[x][subline[1].to_i-1] = subline[4]
-						end 
-					else 
-						for x in subline[3].to_i-1..subline[2].to_i-1
-							outputArray[x][subline[1].to_i-1] = subline[4]
-						end
-					end
+				when 'v', 'V'
+					#puts 'test'
+					handleV(subline[1].to_i,subline[2].to_i, subline[3].to_i, subline[4]) 
+					
+=begin
 				##Handling "H" case
 				when 'h', 'H'
 					if subline[2].to_i<subline[3].to_i #normal case that x1 is less than x2
@@ -70,7 +62,25 @@ class BitmapEditor
 		end 
 	end
 
+	def clearArray()
+		@outputArray.each_index do |i|
+				@outputArray[i].each_index do |j|
+					@outputArray[i][j] = "O"
+				end
+			end
+		end
 
+	def handleV(startline, to, from, color)
+		if to<from #normal case that y1 is less than y2
+			for x in to-1..from-1
+				@outputArray[x][startline-1] = color
+			end 
+		else 
+			for x in from-1..to-1
+				@outputArray[x][startline-1] = color
+			end
+		end	
+	end
 
 	def handleI(width, length)
 		i = width
