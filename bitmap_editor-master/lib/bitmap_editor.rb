@@ -33,22 +33,13 @@ class BitmapEditor
 
 				##Handling "V" case 
 				when 'v', 'V'
-					#puts 'test'
 					handleV(subline[1].to_i,subline[2].to_i, subline[3].to_i, subline[4]) 
 					
-=begin
+
 				##Handling "H" case
 				when 'h', 'H'
-					if subline[2].to_i<subline[3].to_i #normal case that x1 is less than x2
-						for x in subline[2].to_i..subline[3].to_i-1
-							outputArray[subline[1].to_i-2][x] = subline[4]
-						end 
-					else 
-						for x in subline[3].to_i..subline[2].to_i-1
-							outputArray[subline[1].to_i-2][x] = subline[4]
-						end
-					end
-=end
+					handleH(subline[1].to_i, subline[2].to_i, subline[3].to_i, subline[4])
+
 				when 's', 'S'
 					handleS
 					
@@ -80,6 +71,18 @@ class BitmapEditor
 				@outputArray[x][startline-1] = color
 			end
 		end	
+	end
+
+	def handleH(startline, to, from, color)
+		if to<from #normal case that x1 is less than x2
+			for x in to..from-1
+				@outputArray[startline-2][x] = color
+			end 
+		else 
+			for x in from..to-1
+				@outputArray[startline-2][x] = color
+			end
+		end
 	end
 
 	def handleI(width, length)
