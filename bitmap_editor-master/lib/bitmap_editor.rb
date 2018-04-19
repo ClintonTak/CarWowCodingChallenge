@@ -9,14 +9,12 @@ class BitmapEditor
 
 		File.open(file).each do |line|
 			
-			line = line.downcase #lowercase for better input handling 
-			line = line.gsub(/\s+/, "")#removing whitespace for better parsing 
-
-			case line[0]
+			subline = line.split
+			case subline[0]
 				##Handles inital setup for "I" inputs 
-				when 'i'
-					width = line[2].to_i
-					length = line[1].to_i
+				when 'i', 'I'
+					width = subline[2].to_i
+					length = subline[1].to_i
 					i = width
 					while i > 0
 						j = length
@@ -31,49 +29,49 @@ class BitmapEditor
 						i -=1
 					end
 				##handling "L" case 
-				when 'l'
+				when 'l', 'L'
 					if line.include? "-" #possibly move this out to different area 
 						puts "negative number detected"
 						return 0
-					elsif line[1].to_i < 1 or line[1].to_i > width 
+					elsif subline[1].to_i < 1 or subline[1].to_i > width 
 						puts "improper x coordinate on 'L' line "
 						return 0
-					elsif line[2].to_i < 1  or line[2].to_i > length 
+					elsif subline[2].to_i < 1  or subline[2].to_i > length 
 						puts "improper y coordinate input on 'L' line"
 						return 0
 					else 
-						outputArray[line[2].to_i-1][line[1].to_i-1] = line[3]
+						outputArray[subline[2].to_i-1][subline[1].to_i-1] = subline[3]
 					end
 				##handling "C" case 
-				when 'c'
+				when 'c', 'C'
 					outputArray.each_index do |i|
 						outputArray[i].each_index do |j|
 							outputArray[i][j] = "O"
 						end
 					end
 				##Handling "V" case 
-				when 'v' 
-					if line[2].to_i<line[3].to_i #normal case that y1 is less than y2
-						for x in line[2].to_i-1..line[3].to_i-1
-							outputArray[x][line[1].to_i-1] = line[4]
+				when 'v', 'V' 
+					if subline[2].to_i<subline[3].to_i #normal case that y1 is less than y2
+						for x in subline[2].to_i-1..subline[3].to_i-1
+							outputArray[x][subline[1].to_i-1] = subline[4]
 						end 
 					else 
-						for x in line[3].to_i-1..line[2].to_i-1
-							outputArray[x][line[1].to_i-1] = line[4]
+						for x in subline[3].to_i-1..subline[2].to_i-1
+							outputArray[x][subline[1].to_i-1] = subline[4]
 						end
 					end
 				##Handling "H" case
-				when 'h'
-					if line[2].to_i<line[3].to_i #normal case that x1 is less than x2
-						for x in line[2].to_i..line[3].to_i-1
-							outputArray[line[1].to_i-2][x] = line[4]
+				when 'h', 'H'
+					if subline[2].to_i<subline[3].to_i #normal case that x1 is less than x2
+						for x in subline[2].to_i..subline[3].to_i-1
+							outputArray[subline[1].to_i-2][x] = subline[4]
 						end 
 					else 
-						for x in line[3].to_i..line[2].to_i-1
-							outputArray[line[1].to_i-2][x] = line[4]
+						for x in subline[3].to_i..subline[2].to_i-1
+							outputArray[subline[1].to_i-2][x] = subline[4]
 						end
 					end
-				when 's'
+				when 's', 'S'
 					#print outputString
 					puts outputArray.map{|x| x.join('')}
 =begin
