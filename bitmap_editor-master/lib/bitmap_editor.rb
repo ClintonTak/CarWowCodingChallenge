@@ -2,52 +2,32 @@ class BitmapEditor
 
 	def run(file)
 		@outputArray = [] 
-		width = 0
-		length = 0
 		return puts "please provide correct file" if file.nil? || !File.exists?(file)
 
 		File.open(file).each do |line|
-			
+			if line.include? "-"
+			   puts "negative number detected, please check input array"
+			   return 0
+			end
 			subline = line.split
-			case subline[0]
-				##Handles inital setup for "I" inputs 
+			case subline[0] 
+				when '#', '/' #adds support for comments in the test file, must start with # and be followed by a space 
+					next
 				when 'i', 'I'
-					width = subline[2].to_i
-					length = subline[1].to_i
-					handleI(width, length)
-				##handling "L" case 
-
-				when 'l', 'L'
-					if line.include? "-" #possibly move this out to different area 
-						puts "negative number detected"
-						return 0
-					else 
-						handleL(subline[1].to_i,subline[2].to_i, subline[3], width, length)
-					end
-
-
-				##handling "C" case 
-
+					handleI(subline[2].to_i, subline[1].to_i)
+				when 'l', 'L' 
+						handleL(subline[1].to_i,subline[2].to_i, subline[3])
 				when 'c', 'C'
 					clearArray()
-
-				##Handling "V" case 
 				when 'v', 'V'
 					handleV(subline[1].to_i,subline[2].to_i, subline[3].to_i, subline[4]) 
-					
-
-				##Handling "H" case
 				when 'h', 'H'
 					handleH(subline[1].to_i, subline[2].to_i, subline[3].to_i, subline[4])
-
 				when 's', 'S'
 					handleS
-					
-=begin
-
 				else
 					puts 'unrecognised command :(' 
-=end
+
 				
 			end 
 		end 
@@ -99,11 +79,11 @@ class BitmapEditor
 		end
 	end
 
-	def handleL(x, y, color, width, length)
-		if x< 1 or y > width 
+	def handleL(x, y, color)
+		if x< 1 or y > @outputArray[1].size
 			puts "improper x coordinate on 'L' line "
 			return 0
-		elsif y < 1  or y > length 
+		elsif y < 1  or y > @outputArray.size
 			puts "improper y coordinate input on 'L' line"
 			return 0
 		else 
