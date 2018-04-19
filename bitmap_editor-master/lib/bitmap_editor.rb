@@ -51,11 +51,17 @@ class BitmapEditor
 							outputArray[i][j] = "O"
 						end
 					end
-
-
-				
-
-
+				##Handling "V" case 
+				when 'v' 
+					if line[2].to_i<line[3].to_i #normal case that y1 is less than y2
+						for x in line[2].to_i-1..line[3].to_i-1
+							outputArray[x][line[1].to_i-1] = line[4]
+						end 
+					else 
+						for x in line[3].to_i-1..line[2].to_i-1
+							outputArray[x][line[1].to_i-1] = line[4]
+						end
+					end
 				when 's'
 					#print outputString
 					puts outputArray.map{|x| x.join('')}
