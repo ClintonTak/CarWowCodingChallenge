@@ -32,8 +32,6 @@ class BitmapEditor
 					end
 				##handling "L" case 
 				when 'l'
-					puts line[1]
-					puts line[2]
 					if line.include? "-" #possibly move this out to different area 
 						puts "negative number detected"
 						return 0
@@ -46,6 +44,15 @@ class BitmapEditor
 					else 
 						outputArray[line[1].to_i-1][line[2].to_i-1] = line[3]
 					end
+				##handling "C" case 
+				when 'c'
+					outputArray.each_index do |i|
+						outputArray[i].each_index do |j|
+							outputArray[i][j] = "O"
+						end
+					end
+
+
 				
 
 
