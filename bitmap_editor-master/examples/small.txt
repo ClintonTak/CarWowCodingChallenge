@@ -1,0 +1,7 @@
+# small test 
+# test making an array that is really small and then writing to points
+# inside and outside of it 
+I 3 3
+L 1 3 A
+L 1 4 B
+S

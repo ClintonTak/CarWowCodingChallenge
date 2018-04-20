@@ -100,6 +100,7 @@ class BitmapEditor
 
 	def displayBitMap()
 		puts @outputArray.map{|x| x.join('')}		
+		puts "\n"
 	end
 
 end

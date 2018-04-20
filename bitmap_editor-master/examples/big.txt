@@ -1,0 +1,7 @@
+# big test 
+# test making a really big bitmap
+I 200 200
+L 1 3 A
+V 2 3 100 W
+H 3 2 190 Z 
+S
