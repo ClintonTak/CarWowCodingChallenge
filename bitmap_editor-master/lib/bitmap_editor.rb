@@ -19,17 +19,17 @@ class BitmapEditor
 					when '#', '/' #adds support for comments in the test file, must start with # and be followed by a space 
 						next
 					when 'i', 'I'
-						handleI(subline[2].to_i, subline[1].to_i)
+						setUpMap(subline[2].to_i, subline[1].to_i)
 					when 'l', 'L' 
-							handleL(subline[1].to_i,subline[2].to_i, subline[3])
+						drawPoint(subline[1].to_i,subline[2].to_i, subline[3])
 					when 'c', 'C'
 						clearArray()
 					when 'v', 'V'
-						handleV(subline[1].to_i,subline[2].to_i, subline[3].to_i, subline[4]) 
+						drawVerticalLine(subline[1].to_i,subline[2].to_i, subline[3].to_i, subline[4]) 
 					when 'h', 'H'
-						handleH(subline[1].to_i, subline[2].to_i, subline[3].to_i, subline[4])
+						drawHorizontalLine(subline[1].to_i, subline[2].to_i, subline[3].to_i, subline[4])
 					when 's', 'S'
-						handleS
+						displayBitMap
 					else
 						puts 'unrecognised command :(' 
 				end
@@ -47,7 +47,7 @@ class BitmapEditor
 			end
 		end
 
-	def handleV(startline, to, from, color)
+	def drawVerticalLine(startline, to, from, color)
 		if to<from #normal case that y1 is less than y2
 			for x in to-1..from-1
 				@outputArray[x][startline-1] = color
@@ -59,7 +59,7 @@ class BitmapEditor
 		end	
 	end
 
-	def handleH(startline, to, from, color)
+	def drawHorizontalLine(startline, to, from, color)
 		if to<from #normal case that x1 is less than x2
 			for x in to..from-1
 				@outputArray[startline-2][x] = color
@@ -71,7 +71,7 @@ class BitmapEditor
 		end
 	end
 
-	def handleI(width, length)
+	def setUpMap(width, length)
 		i = width
 		while i > 0
 			j = length
@@ -85,7 +85,7 @@ class BitmapEditor
 		end
 	end
 
-	def handleL(x, y, color)
+	def drawPoint(x, y, color)
 		if x< 1 or y > @outputArray[1].size
 			puts "improper x coordinate on 'L' line "
 			return 0
@@ -98,7 +98,7 @@ class BitmapEditor
 	end 
 
 
-	def handleS()
+	def displayBitMap()
 		puts @outputArray.map{|x| x.join('')}		
 	end
 
