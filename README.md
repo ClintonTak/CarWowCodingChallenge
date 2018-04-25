@@ -39,3 +39,11 @@ OWOOO
 3. Did some input sanitization work
 4. Wrote more test cases 
 5. Handled abnormal cases for input 
+
+## Future changes 
+
+If I were to continue with this project I would implement the following features:
+
+1. Make a Graphical User Interface using the model view controller design pattern 
+2. Write more test cases and do more input checking and error handling
+3. Add more features like drawing diagonal lines, circles around a point, and maybe even making a GIF like feature that runs a loop and changes parts of the bitmap over time. 
